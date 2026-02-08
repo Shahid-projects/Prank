@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <!-- IMPORTANT FOR MOBILE -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Secure Payment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .box {
+            background: #1e293b;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            width: 90%;
+            max-width: 360px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            background: #22c55e;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #16a34a;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box">
+        <h2>Verify Payment</h2>
+        <p>Click below to continue</p>
+        <button onclick="prank()">Proceed</button>
+    </div>
+
+    <audio id="sound" src="song.mp3"></audio>
+
+    <script>
+        function prank() {
+            const audio = document.getElementById("sound");
+            audio.play();
+
+            setTimeout(() => {
+                alert("₹1000 has been debited from your account 😈");
+            }, 300);
+
+            setTimeout(() => {
+                audio.pause();
+                audio.currentTime = 0;
+            }, 5000);
+        }
+    </script>
+
+</body>
+
+</html>
