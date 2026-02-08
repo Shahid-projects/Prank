@@ -1,77 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment Verification</title>
 
-    <!-- IMPORTANT FOR MOBILE -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #0f172a, #020617);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-    <title>Secure Payment</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #0f172a;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
+/* Payment Card */
+.card {
+    background: #ffffff;
+    width: 90%;
+    max-width: 360px;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+}
 
-        .box {
-            background: #1e293b;
-            padding: 25px;
-            border-radius: 10px;
-            text-align: center;
-            width: 90%;
-            max-width: 360px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-        }
+.card h2 {
+    margin-top: 0;
+    text-align: center;
+    color: #0f172a;
+}
 
-        button {
-            width: 100%;
-            padding: 14px;
-            font-size: 18px;
-            border: none;
-            border-radius: 5px;
-            background: #22c55e;
-            cursor: pointer;
-        }
+.details {
+    margin: 20px 0;
+}
 
-        button:hover {
-            background: #16a34a;
-        }
-    </style>
+.row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    color: #334155;
+}
+
+.amount {
+    font-size: 24px;
+    font-weight: bold;
+    color: #16a34a;
+    text-align: center;
+    margin: 15px 0;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    background: #22c55e;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+/* Popup */
+.popup {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-box {
+    background: white;
+    width: 85%;
+    max-width: 300px;
+    padding: 25px;
+    border-radius: 14px;
+    text-align: center;
+    animation: pop 0.3s ease;
+}
+
+.popup-box h3 {
+    color: #16a34a;
+    margin-bottom: 10px;
+}
+
+.popup-box p {
+    color: #334155;
+    font-size: 16px;
+}
+
+@keyframes pop {
+    from { transform: scale(0.7); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+</style>
 </head>
 
 <body>
 
-    <div class="box">
-        <h2>Verify Payment</h2>
-        <p>Click below to continue</p>
-        <button onclick="prank()">Proceed</button>
+<div class="card">
+    <h2>Payment Summary</h2>
+
+    <div class="details">
+        <div class="row"><span>Merchant</span><span>Online Store</span></div>
+        <div class="row"><span>Payment Method</span><span>UPI</span></div>
     </div>
 
-    <audio id="sound" src="song.mp3"></audio>
+    <div class="amount">₹1000</div>
 
-    <script>
-        function prank() {
-            const audio = document.getElementById("sound");
-            audio.play();
+    <button onclick="payNow()">Proceed to Pay</button>
+</div>
 
-            setTimeout(() => {
-                alert("₹1000 has been debited from your account 😈");
-            }, 300);
+<!-- Popup -->
+<div class="popup" id="popup">
+    <div class="popup-box">
+        <h3>Payment Successful</h3>
+        <p>₹1000 has been debited from your account</p>
+    </div>
+</div>
 
-            setTimeout(() => {
-                audio.pause();
-                audio.currentTime = 0;
-            }, 5000);
-        }
-    </script>
+<audio id="sound" src="song.mp3"></audio>
+
+<script>
+function payNow() {
+    const audio = document.getElementById("sound");
+    const popup = document.getElementById("popup");
+
+    audio.play();                // song starts immediately
+    popup.style.display = "flex";
+
+    setTimeout(() => {
+        popup.style.display = "none";
+        audio.pause();
+        audio.currentTime = 0;
+    }, 5000);
+}
+</script>
 
 </body>
-
 </html>
